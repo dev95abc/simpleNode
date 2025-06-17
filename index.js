@@ -1,3 +1,6 @@
+require('dns').setDefaultResultOrder('ipv4first');
+
+
 const express = require('express');
 const { Client } = require('pg');
 
