@@ -4,26 +4,18 @@ const { Client } = require('pg');
 const app = express();
 const port = 3000;
 
-// Replace [YOUR-PASSWORD] with your actual Supabase password
-// const connectionString = 'postgresql://postgres:SAGARKASHYAP8@db.uqyuhmovgfpklefywmpv.supabase.co:5432/postgres';
-
+// PostgreSQL connection configuration
 const client = new Client({
-  connectionString: connectionString,
   host: 'uqyuhmovgfpklefywmpv.supabase.co',
   port: 5432,
   user: 'postgres',
   password: 'SAGARKASHYAP8',
   database: 'postgres',
   ssl: {
-    rejectUnauthorized: false,
+    rejectUnauthorized: false, // Required for Supabase SSL
   },
-  family: 4, // 👈 Force IPv4
+  family: 4, // ⬅️ Force IPv4 only
 });
-
-
-// const client = new Client({
-//   connectionString: connectionString,
-// });
 
 // Connect to the PostgreSQL database
 client.connect()
@@ -34,12 +26,12 @@ client.connect()
     console.error('❌ Failed to connect to PostgreSQL database:', err.message);
   });
 
-// Sample route
+// Test route
 app.get('/', (req, res) => {
   res.send('Hello from Express + PostgreSQL!');
 });
 
-// Start server
+// Start the Express server
 app.listen(port, () => {
   console.log(`🚀 Server running at http://localhost:${port}`);
 });
